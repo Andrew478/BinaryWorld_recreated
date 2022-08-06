@@ -3472,9 +3472,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a868a75539e50e442bfe7e8305362921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayable: 1
   speed: 8
   speedMultiplier: 1
+  isControllable: 1
+  isPlayable: 1
+  StartState: {fileID: 11400000, guid: 53f744b73aba01f44988ea1103b9de99, type: 2}
+  CurrentState: {fileID: 0}
+  NormalState: {fileID: 0}
+  InvincibleState: {fileID: 0}
+  CaughtInWebState: {fileID: 0}
+  RoundWinState: {fileID: 0}
 --- !u!58 &840845369
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4267,9 +4274,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a868a75539e50e442bfe7e8305362921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayable: 0
   speed: 8
   speedMultiplier: 1
+  isControllable: 1
+  isPlayable: 0
+  StartState: {fileID: 11400000, guid: 53f744b73aba01f44988ea1103b9de99, type: 2}
+  CurrentState: {fileID: 0}
+  NormalState: {fileID: 0}
+  InvincibleState: {fileID: 0}
+  CaughtInWebState: {fileID: 0}
+  RoundWinState: {fileID: 0}
 --- !u!58 &1960292543
 CircleCollider2D:
   m_ObjectHideFlags: 0

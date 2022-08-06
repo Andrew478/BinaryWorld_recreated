@@ -4,31 +4,51 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IPlayerStateActions
 {
-    public bool isPlayable = false;
+    
+    
     Rigidbody2D rb;
 
     public float speed = 8.0f;
     public float speedMultiplier = 1.0f;
 
+    public bool IsControllable { get { return isControllable; } set { isControllable = value; } }
+    public bool isControllable = true;
+    public bool IsPlayable { get { return isPlayable; } set { isPlayable = value; } }
+    public bool isPlayable = true;
+
+    public PlayerState StartState;
+    public PlayerState CurrentState; // public для Debug
+
+    public PlayerState NormalState;
+    public PlayerState InvincibleState;
+    public PlayerState CaughtInWebState;
+    public PlayerState RoundWinState;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        SetState(StartState);
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W)) Move(Vector2.up);
-        else if (Input.GetKey(KeyCode.S)) Move(Vector2.down);
-        else if (Input.GetKey(KeyCode.A)) Move(isPlayable ? Vector2.left : -Vector2.left);
-        else if (Input.GetKey(KeyCode.D)) Move(isPlayable ? Vector2.right : -Vector2.right
-            );
+        if (!CurrentState.IsFinished) CurrentState.RunFixedUpdate();
+    }
+    void Update()
+    {
+        if (!CurrentState.IsFinished) CurrentState.Run(); // смена состояния происходит путём триггеринга извне
     }
 
 
-    void Move(Vector2 direction)
+    public void SetState(PlayerState newState)
+    {
+        CurrentState = Instantiate(newState);
+        CurrentState.player = this;
+        CurrentState.Init();
+    }
+    public void Move(Vector2 direction)
     {
         Vector2 position = rb.position;
         Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
