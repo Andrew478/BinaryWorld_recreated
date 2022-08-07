@@ -21,6 +21,12 @@ public class PlayerStateNormal : PlayerState
             else if (Input.GetKey(KeyCode.A)) player.Move(player.IsPlayable ? Vector2.left : -Vector2.left);
             else if (Input.GetKey(KeyCode.D)) player.Move(player.IsPlayable ? Vector2.right : -Vector2.right);
         }
+
+        //if (Input.GetKeyDown(KeyCode.Space)) player.Shoot();
+    }
+    public override void Run()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) player.Shoot(); // TODO: перенести в FixedUpdate?
     }
     public override void Exit()
     {

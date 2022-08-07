@@ -11,4 +11,5 @@ public interface IPlayerStateActions
     void SetState(PlayerState newState);
     void SetAnimation(string triggerName);
     void ResetAnimation(string triggerName);
+    void Shoot();
 }

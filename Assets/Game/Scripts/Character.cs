@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-public class Character : MonoBehaviour, IPlayerStateActions
+public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
 {
     public PlayerName playerName;
     
@@ -28,6 +28,10 @@ public class Character : MonoBehaviour, IPlayerStateActions
     public PlayerState RoundWinState;
 
     GameManager gameManager;
+
+    Vector2 lastDirection; // куда в последний раз игрок шёл
+
+    public GameObject shootVisual;
     
     void Start()
     {
@@ -60,6 +64,8 @@ public class Character : MonoBehaviour, IPlayerStateActions
     }
     public void Move(Vector2 direction)
     {
+        lastDirection = direction;
+
         Vector2 position = rb.position;
         Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
         rb.MovePosition(position + translation);
@@ -71,6 +77,46 @@ public class Character : MonoBehaviour, IPlayerStateActions
     public void ResetAnimation(string triggerName)
     {
         animator.ResetTrigger(triggerName);
+    }
+
+
+    public void Shoot()
+    {
+        Debug.Log("Стреляю");
+        /*
+        LayerMask shootingMask = LayerMask.GetMask("Player", "Enemy", "Object");
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, Vector2.one * 5, 0.0f, lastDirection, 1.5f, shootingMask);
+        */
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, Vector2.one, 0.0f, (lastDirection - (Vector2) transform.position), 5.5f);
+        StopCoroutine(ShootingEffect()); // завершаем предыдущий выстрел, если игрок не дождался его завершения
+        shootVisual.SetActive(false);
+
+        foreach(RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject.name == gameObject.name) return;
+            Debug.Log("Попал в объект: " + hit.collider.gameObject.name);
+            IDamageble obj = hit.collider.gameObject.GetComponent<IDamageble>();
+            if (obj == null) continue;
+            Debug.Log("У объекта " + hit.collider.gameObject.name + " найден элемент IDamageble");
+            obj.TakeDamage();
+        }
+
+        StartCoroutine(ShootingEffect());
+        
+    }
+
+    IEnumerator ShootingEffect()
+    {
+        shootVisual.SetActive(true);
+
+        yield return new WaitForSeconds(0.7f);
+
+        shootVisual.SetActive(false);
+    }
+
+    public void TakeDamage()
+    {
+        SetState(NormalState);
     }
 }
 
