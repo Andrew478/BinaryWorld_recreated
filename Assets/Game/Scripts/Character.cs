@@ -6,9 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class Character : MonoBehaviour, IPlayerStateActions
 {
-    
+    public PlayerName playerName;
     
     Rigidbody2D rb;
+    Animator animator;
 
     public float speed = 8.0f;
     public float speedMultiplier = 1.0f;
@@ -26,9 +27,17 @@ public class Character : MonoBehaviour, IPlayerStateActions
     public PlayerState CaughtInWebState;
     public PlayerState RoundWinState;
 
+    GameManager gameManager;
+    
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+
+        if ((int)playerName == 1) gameManager.player1 = this;
+        else if ((int)playerName == 2) gameManager.player2 = this;
+
         SetState(StartState);
     }
 
@@ -44,6 +53,7 @@ public class Character : MonoBehaviour, IPlayerStateActions
 
     public void SetState(PlayerState newState)
     {
+        if (CurrentState != null) CurrentState.Exit();
         CurrentState = Instantiate(newState);
         CurrentState.player = this;
         CurrentState.Init();
@@ -54,4 +64,19 @@ public class Character : MonoBehaviour, IPlayerStateActions
         Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
         rb.MovePosition(position + translation);
     }
+    public void SetAnimation(string triggerName)
+    {
+        animator.SetTrigger(triggerName);
+    }
+    public void ResetAnimation(string triggerName)
+    {
+        animator.ResetTrigger(triggerName);
+    }
+}
+
+
+public enum PlayerName
+{
+    Gurin = 1,
+    Malon = 2
 }

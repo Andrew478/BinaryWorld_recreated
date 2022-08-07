@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428dbe116b252d54fbb30b3c4759f57e, type: 3}
-  m_Name: PlayerStateNormal
+  m_Script: {fileID: 11500000, guid: 90f0a60c4da76654f9f43f57a75ffc12, type: 3}
+  m_Name: PlayerStateCaughtInWeb
   m_EditorClassIdentifier: 
-  animationTriggerName: TriggerNormal
+  animationTriggerName: TriggerCaughtInWeb

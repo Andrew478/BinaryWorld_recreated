@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     MusicManager musicManager;
     UI_AnnouncerWindow announcerWindow;
 
+    public IPlayerStateActions player1;
+    public IPlayerStateActions player2;
+
     void Start()
     {
         roundTimer = gameObject.GetComponent<RoundTimer>();
         musicManager = GameObject.FindObjectOfType<MusicManager>();
         announcerWindow = gameObject.GetComponent<UI_AnnouncerWindow>();
+
         StartNewGame();
     }
 
@@ -53,7 +57,7 @@ public class GameManager : MonoBehaviour
         roundTimer.ActivateTimer(true);
         musicManager.ChangeMusic(GameMusicStates.GameMusic);
     }
-    void PlayerWin()
+    public void PlayerWin()
     {
         musicManager.ChangeMusic(GameMusicStates.WinMusic);
     }

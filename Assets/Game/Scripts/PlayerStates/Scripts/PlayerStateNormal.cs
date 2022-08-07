@@ -7,6 +7,11 @@ public class PlayerStateNormal : PlayerState
 {
     Vector2 direction;
 
+    public override void Init()
+    {
+        player.IsControllable = true;
+        player.SetAnimation(animationTriggerName);
+    }
     public override void RunFixedUpdate()
     {
         if (player.IsControllable)
@@ -16,5 +21,9 @@ public class PlayerStateNormal : PlayerState
             else if (Input.GetKey(KeyCode.A)) player.Move(player.IsPlayable ? Vector2.left : -Vector2.left);
             else if (Input.GetKey(KeyCode.D)) player.Move(player.IsPlayable ? Vector2.right : -Vector2.right);
         }
+    }
+    public override void Exit()
+    {
+        player.ResetAnimation(animationTriggerName);
     }
 }
