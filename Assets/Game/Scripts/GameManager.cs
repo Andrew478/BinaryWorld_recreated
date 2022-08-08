@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerWin()
     {
+        announcerWindow.DisplayMessage(true, AnnouncerWindow_AnnounceType.PlayerWin);
+        roundTimer.ActivateTimer(false);
         musicManager.ChangeMusic(GameMusicStates.WinMusic);
     }
 }

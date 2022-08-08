@@ -30,8 +30,8 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
     GameManager gameManager;
 
     Vector2 lastDirection; // куда в последний раз игрок шёл
-
     public GameObject shootVisual;
+    float shootDistance = 2.0f;
     
     void Start()
     {
@@ -79,35 +79,42 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
         animator.ResetTrigger(triggerName);
     }
 
-
+    
     public void Shoot()
     {
         Debug.Log("Стреляю");
-        /*
-        LayerMask shootingMask = LayerMask.GetMask("Player", "Enemy", "Object");
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, Vector2.one * 5, 0.0f, lastDirection, 1.5f, shootingMask);
-        */
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, Vector2.one, 0.0f, (lastDirection - (Vector2) transform.position), 5.5f);
-        StopCoroutine(ShootingEffect()); // завершаем предыдущий выстрел, если игрок не дождался его завершения
-        shootVisual.SetActive(false);
 
-        foreach(RaycastHit2D hit in hits)
-        {
-            if (hit.collider.gameObject.name == gameObject.name) return;
-            Debug.Log("Попал в объект: " + hit.collider.gameObject.name);
-            IDamageble obj = hit.collider.gameObject.GetComponent<IDamageble>();
-            if (obj == null) continue;
-            Debug.Log("У объекта " + hit.collider.gameObject.name + " найден элемент IDamageble");
-            obj.TakeDamage();
-        }
-
+        StopCoroutine(ShootingEffect());
         StartCoroutine(ShootingEffect());
-        
+
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, Vector2.one, 0.0f, lastDirection, shootDistance);
+
+        if (hits == null) return;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            Debug.Log("Луч попал в " + hit.collider.gameObject.name);
+            
+            IDamageble damageble = hit.collider.gameObject.GetComponent<IDamageble>();
+            if (damageble != null)
+            {
+                if (hit.collider.gameObject.name == gameObject.name) continue;
+                damageble.TakeDamage();
+            }
+        }
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        //Gizmos.DrawWireCube(transform.position, Vector3.one);
+        //Gizmos.DrawWireCube(transform.position + (Vector3) lastDirection * shootDistance, Vector3.one);
+        Gizmos.DrawWireCube((Vector2)transform.position + lastDirection * shootDistance, Vector3.one);
+    }
     IEnumerator ShootingEffect()
     {
         shootVisual.SetActive(true);
+        shootVisual.transform.rotation = Quaternion.LookRotation(lastDirection, Vector2.up);
 
         yield return new WaitForSeconds(0.7f);
 
