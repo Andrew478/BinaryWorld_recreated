@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
+public class Character : MonoBehaviour, IPlayerStateActions, IDamageble, IPlayerTrigger
 {
     public PlayerName playerName;
     
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
 
     Vector2 lastDirection; // куда в последний раз игрок шёл
     public GameObject shootVisual;
-    float shootDistance = 1.0f;
+    float shootDistance = 0.9f;
     
     void Start()
     {
@@ -125,6 +125,10 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
     public void TakeDamage()
     {
         SetState(NormalState);
+    }
+    public void TriggerPlayer()
+    {
+
     }
 }
 

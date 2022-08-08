@@ -500,7 +500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.473, y: -0.446}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &216240559
@@ -2744,6 +2744,7 @@ GameObject:
   - component: {fileID: 1068330101}
   - component: {fileID: 1068330104}
   - component: {fileID: 1068330105}
+  - component: {fileID: 1068330106}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2830,6 +2831,20 @@ MonoBehaviour:
   scoreText: {fileID: 159835503}
   ScoreVisual: {fileID: 2010079136}
   visualScoreLifetime: 0.5
+--- !u!114 &1068330106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068330100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec567b475deaea43af1ed51757dc113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBonusCount: 3
+  minMaxTimeInterval: {x: 5, y: 10}
 --- !u!1 &1334576241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3341,7 +3356,7 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: -7, y: -3, z: 0}
@@ -3351,7 +3366,7 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: 2, y: -3, z: 0}
@@ -3361,7 +3376,7 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: -5, y: -1, z: 0}
@@ -3391,7 +3406,7 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: -4, y: 1, z: 0}
@@ -3421,17 +3436,17 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: -5, y: 4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 1
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: -2, y: 4, z: 0}
@@ -3451,7 +3466,7 @@ Tilemap:
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 1
+      m_TileObjectToInstantiateIndex: 2
       dummyAlignment: 0
       m_AllTileFlags: 2
   m_AnimatedTiles: {}
@@ -3464,9 +3479,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b5de0b264b3e4d44f95259aac80b2fb4, type: 2}
   - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: 123ff140260974942815ca328f8780b9, type: 2}
-  m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 34df26d9e9a9c434e98f3afbd9037168, type: 3}
+  m_TileSpriteArray: []
   m_TileMatrixArray:
   - m_RefCount: 12
     m_Data:
@@ -3493,7 +3506,11 @@ Tilemap:
   - m_RefCount: 5
     m_Data: {fileID: 2822849002682063903, guid: b0769d3fefe176445aa5dd87d7e2ce99, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: 2826165762031135641, guid: e1b97f10c880e3a4a9738a711be70e2a, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: 6554073072915229423, guid: 55c788790d68cff45840b69f98f5a5c6, type: 3}
+  - m_RefCount: 5
+    m_Data: {fileID: 6203580742134512228, guid: a1b3e2da9a14cf145bda5de71821bb3d, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -7, y: -5, z: 0}
