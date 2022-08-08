@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerState : MonoBehaviour
 {
     public PlayerState newState;
+    public UnityEvent OnTrigger; // для прибавления очков
 
     [Header("Одноразовый ли триггер")]
     public bool worksSingleTime = true;
@@ -14,6 +16,8 @@ public class TriggerState : MonoBehaviour
         {
             player.SetState(newState);
         }
+        OnTrigger.Invoke();
         if (worksSingleTime) Destroy(gameObject);
     }
+
 }

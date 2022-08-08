@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     RoundTimer roundTimer;
     MusicManager musicManager;
     UI_AnnouncerWindow announcerWindow;
+    ScoreManager scoreManager;
 
     public IPlayerStateActions player1;
     public IPlayerStateActions player2;
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
         roundTimer = gameObject.GetComponent<RoundTimer>();
         musicManager = GameObject.FindObjectOfType<MusicManager>();
         announcerWindow = gameObject.GetComponent<UI_AnnouncerWindow>();
+        scoreManager = GameManager.FindObjectOfType<ScoreManager>();
 
+        scoreManager.UpdateScoreUI();
         StartNewGame();
     }
 

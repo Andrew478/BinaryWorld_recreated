@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2822849002682063900}
   - component: {fileID: 2822849002682063901}
-  - component: {fileID: 2822849002682063902}
   - component: {fileID: 2822849002682063899}
+  - component: {fileID: 2822849002682063902}
   - component: {fileID: 6562606693658211478}
-  - component: {fileID: -4686503913229115712}
-  - component: {fileID: -1412167623460991164}
+  - component: {fileID: 4724195404811127447}
   m_Layer: 7
   m_Name: Web
   m_TagString: Untagged
@@ -89,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2822849002682063902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822849002682063903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdeae00fbf92f44397aa4dbea12319d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newState: {fileID: 11400000, guid: 4629d148f21615249a54b1a69a6c42a4, type: 2}
-  worksSingleTime: 1
 --- !u!61 &2822849002682063899
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,6 +114,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &2822849002682063902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822849002682063903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdeae00fbf92f44397aa4dbea12319d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newState: {fileID: 11400000, guid: 4629d148f21615249a54b1a69a6c42a4, type: 2}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  worksSingleTime: 1
 --- !u!114 &6562606693658211478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,50 +143,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea0c14aa44b3824fb40c719aa10a0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &-4686503913229115712
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822849002682063903}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &-1412167623460991164
-BoxCollider2D:
+  OnDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4724195404811127447}
+        m_TargetAssemblyTypeName: AddScore, Assembly-CSharp
+        m_MethodName: AddScores
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 200
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4724195404811127447
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2822849002682063903}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2ac27be1707e249b2f27bedee9e92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
