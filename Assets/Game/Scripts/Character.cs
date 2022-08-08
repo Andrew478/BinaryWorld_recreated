@@ -31,7 +31,7 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
 
     Vector2 lastDirection; // куда в последний раз игрок шёл
     public GameObject shootVisual;
-    float shootDistance = 2.0f;
+    float shootDistance = 1.0f;
     
     void Start()
     {
@@ -114,9 +114,10 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble
     IEnumerator ShootingEffect()
     {
         shootVisual.SetActive(true);
-        shootVisual.transform.rotation = Quaternion.LookRotation(lastDirection, Vector2.up);
 
-        yield return new WaitForSeconds(0.7f);
+        shootVisual.transform.rotation = Quaternion.LookRotation(Vector3.forward, lastDirection);
+
+        yield return new WaitForSeconds(0.1f);
 
         shootVisual.SetActive(false);
     }

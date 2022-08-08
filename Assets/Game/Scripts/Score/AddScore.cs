@@ -5,13 +5,19 @@ using UnityEngine;
 public class AddScore : MonoBehaviour
 {
     ScoreManager manager;
+    public int scoreValue = 200;
     void Start()
     {
         manager = GameObject.FindObjectOfType<ScoreManager>();
     }
 
-    public void AddScores(int val)
+    public void AddScores()
     {
-        manager.UpdateScore(val);
+        manager.UpdateScore(scoreValue);
+    }
+
+    public void SpawnScore()
+    {
+        manager.SpawnScore((Vector2)transform.position, scoreValue);
     }
 }
