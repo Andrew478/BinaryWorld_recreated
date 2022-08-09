@@ -19,6 +19,9 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble, IPlayer
     public bool IsPlayable { get { return isPlayable; } set { isPlayable = value; } }
     public bool isPlayable = true;
 
+    public bool IsCaughtInWeb { get { return isCaughtInWeb; } set { isCaughtInWeb = value; } }
+    public bool isCaughtInWeb = false;
+
     public PlayerState StartState;
     public PlayerState CurrentState; // public для Debug
 
@@ -27,6 +30,7 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble, IPlayer
     public PlayerState CaughtInWebState;
     public PlayerState RoundWinState;
 
+    public GameManager GameM { get { return gameManager; } set { isCaughtInWeb = gameManager; } }
     GameManager gameManager;
 
     Vector2 lastDirection; // куда в последний раз игрок шёл
@@ -129,6 +133,10 @@ public class Character : MonoBehaviour, IPlayerStateActions, IDamageble, IPlayer
     public void TriggerPlayer()
     {
 
+    }
+    public PlayerState GetCurrentState()
+    {
+        return this.CurrentState;
     }
 }
 

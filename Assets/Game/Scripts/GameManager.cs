@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         roundTimer.ActivateTimer(false);
         musicManager.ChangeMusic(GameMusicStates.GameOverMusic);
+        RestartGameScene(9);
     }
     void GameOver()
     {
@@ -65,5 +67,25 @@ public class GameManager : MonoBehaviour
         announcerWindow.DisplayMessage(true, AnnouncerWindow_AnnounceType.PlayerWin);
         roundTimer.ActivateTimer(false);
         musicManager.ChangeMusic(GameMusicStates.WinMusic);
+        RestartGameScene(12);
+    }
+
+    void RestartGameScene(float timeBeforeRestart = 7.0f)
+    {
+        StartCoroutine(Restart(timeBeforeRestart)); // TODO: Временное решение
+    }
+    IEnumerator Restart(float timeBeforeRestart)
+    {
+        yield return new WaitForSeconds(timeBeforeRestart);
+        SceneManager.LoadScene(0);
+    }
+    public void CheckForGameOver()
+    {
+        if (player1.IsCaughtInWeb & player2.IsCaughtInWeb)
+        {
+            announcerWindow.DisplayMessage(true, AnnouncerWindow_AnnounceType.Fail_KilledByEnemy_you);
+            RoundEnded();
+            RestartGameScene();
+        }
     }
 }
