@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (player1.IsCaughtInWeb & player2.IsCaughtInWeb)
         {
-            announcerWindow.DisplayMessage(true, AnnouncerWindow_AnnounceType.Fail_KilledByEnemy_you);
+            announcerWindow.DisplayMessage(true, AnnouncerWindow_AnnounceType.Fail_caughtInWeb);
             RoundEnded();
             RestartGameScene();
         }

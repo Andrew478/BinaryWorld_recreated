@@ -18,8 +18,7 @@ public class UI_AnnouncerWindow : MonoBehaviour
     [Space]
 
     public string text_fail_timeout = "Time is out!";
-    public string text_fail_killedByEnemy_you = "You are killed by enemy!";
-    public string text_fail_killedByEnemy_partner = "Your sweetie is killed by enemy!";
+    public string text_fail_caughtInWeb = "You are caught in enemy's web!";
     public string text_fail_header = "Round failed!";
 
     [Space]
@@ -41,11 +40,8 @@ public class UI_AnnouncerWindow : MonoBehaviour
             case AnnouncerWindow_AnnounceType.Fail_TimedOut:
                 ChangeText(text_fail_header, text_fail_timeout);
                 break;
-            case AnnouncerWindow_AnnounceType.Fail_KilledByEnemy_you:
-                ChangeText(text_fail_header, text_fail_killedByEnemy_you);
-                break;
-            case AnnouncerWindow_AnnounceType.Fail_KilledByEnemy_partner:
-                ChangeText(text_fail_header, text_fail_killedByEnemy_partner);
+            case AnnouncerWindow_AnnounceType.Fail_caughtInWeb:
+                ChangeText(text_fail_header, text_fail_caughtInWeb);
                 break;
             case AnnouncerWindow_AnnounceType.GameOver:
                 ChangeText(text_gameOver_header, text_gameOver);
@@ -64,7 +60,6 @@ public enum AnnouncerWindow_AnnounceType
 {
     PlayerWin,
     Fail_TimedOut,
-    Fail_KilledByEnemy_you,
-    Fail_KilledByEnemy_partner,
+    Fail_caughtInWeb,
     GameOver
 }
